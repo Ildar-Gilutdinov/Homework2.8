@@ -14,7 +14,7 @@ public class Main {
         people.add(new Person("Лев", "Ди Лас Белинкин Ци", 67));
         people.add(new Person("Эрнест", "Ли Ванс Ган Хемингуэй", 42));
 
-//        Comparator<Person> PersonComparatorSurnameNameAge = new Comparator<Person>() {
+//        Comparator<Person> personComparatorSurnameNameAge = new Comparator<Person>() {
 //            final int maxSurnameWord = 3;//мин кол-ва слов в фамилии для проверки
 //            @Override
 //            public int compare(Person p1, Person p2) {
@@ -27,16 +27,28 @@ public class Main {
 //            }
 //        };
 
-        Comparator<Person> PersonComparatorSurnameNameAge2 = (p1, p2) -> {
-            int surname1 = p1.getSurname().split(" ").length; // разделяем фамилии на слова
-            int surname2 = p2.getSurname().split(" ").length; // разделяем фамилии на слова
-            if (Math.min(surname1, 3) != (Math.min(surname2, 3))) {
-                return Integer.compare(surname1, surname2);
+
+        // TODO: 28.09.2022  первый вариант лямбды
+//        Comparator<Person> PersonComparatorSurnameNameAge2 = (p1, p2) -> {
+//            int surname1 = p1.getSurname().split(" ").length; // разделяем фамилии на слова
+//            int surname2 = p2.getSurname().split(" ").length; // разделяем фамилии на слова
+//            if (Math.min(surname1, 3) != (Math.min(surname2, 3))) {
+//                return Integer.compare(surname1, surname2);
+//            }
+//            return Integer.compare(p1.getAge(), p2.getAge()); // сравнение по возрасту;
+//        };
+        //Collections.sort(people, PersonComparatorSurnameNameAge);
+
+        // TODO: 28.09.2022  Второй вариант лямбды (обновленный)
+        Comparator<Person> personComparatorSurnameNameAge3 = (p1, p2) -> {
+            if (Math.min(p1.getSurname().split(" ").length, 3) != (Math.min(p2.getSurname().split(" ").length, 3))) {
+                return Integer.compare(p1.getSurname().split(" ").length, p2.getSurname().split(" ").length);
             }
             return Integer.compare(p1.getAge(), p2.getAge()); // сравнение по возрасту;
         };
-        //Collections.sort(people, PersonComparatorSurnameNameAge);
-        Collections.sort(people, PersonComparatorSurnameNameAge2);
+
+
+        Collections.sort(people, personComparatorSurnameNameAge3);
         for (Person person : people) {
             System.out.println(person);
         }
