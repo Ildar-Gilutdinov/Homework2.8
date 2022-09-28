@@ -12,12 +12,11 @@ public class Main {
         people.add(new Person("Лев", "Ди Лас Белинкин Ци", 67));
         people.add(new Person("Эрнест", "Ли Ванс Ган Хемингуэй", 42));
 
-
+// TODO: 28.09.2022 удалил класс сомпоратора PersonComparatorSurnameNameAge
         Predicate<Person> predicate = person -> person.getAge() < 18;
         people.removeIf(predicate);
         System.out.println(people);
 
         System.out.println("Программа завершина");
-
     }
 }
