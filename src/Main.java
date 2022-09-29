@@ -1,21 +1,22 @@
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
 
 public class Main {
 
     public static void main(String[] args) {
         System.out.println("Программа определения знатности людей");
         List<Person> people = new ArrayList<>();
-        people.add(new Person("Стивинг", "Кинг ", 28));
-        people.add(new Person("Джордж", "Ди Сисьвер Оушен Гу", 53));
+        people.add(new Person("Стивинг", "Кинг ", 15));
+        people.add(new Person("Джордж", "Ди Сисьвер Оушен Гу", 17));
         people.add(new Person("Лев", "Ди Лас Белинкин Ци", 67));
         people.add(new Person("Эрнест", "Ли Ванс Ган Хемингуэй", 42));
 
-        Collections.sort(people, new PersonComparatorSurnameNameAge(3));
-        for (Person person : people) {
-            System.out.println(person);
-        }
+// TODO: 28.09.2022 удалил класс сомпоратора PersonComparatorSurnameNameAge
+        Predicate<Person> predicate = person -> person.getAge() < 18;
+        people.removeIf(predicate);
+        System.out.println(people);
+
         System.out.println("Программа завершина");
     }
 }
